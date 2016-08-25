@@ -1,0 +1,24 @@
+<h3>User Info</h3>
+
+Name :<%=  @user.name %>
+
+<h3>New Secret</h3>
+<form action="/secrets/<%= @user.id %>/create" method="post" >
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >  <!-- nameoftable.delete.all is to delete all records in table -->
+<textarea name ="content" value= "<%= @user.id%>" ></textarea>	
+<input type="submit" name="Create_Secret">
+</form>
+
+<h3>User's Secret</h3>
+<% @secret.each do |s| %>
+<p><%= s.content %><p  name="Likes" ><%= s.likes.count %> likes</p></p>
+<form action="/secrets/<%= s.id %>" method="post" >
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+<input type="hidden" name="_method"  value="delete">
+<input type="submit" value="Delete">
+</form>
+
+<%end%>
+
+
+<p><a href="/user/<%= @user.id %>/edit">Edit_Profile</a></p>
